@@ -13,19 +13,29 @@
 <body>
     <div class="ui container">
         <br>
-        <h1 class="ui center aligned header">TASK APP</h1>
-        <form class="ui form" action="/add" method="post">
-            <label for="title"> TASKS </label>
-            <input type="text" name="title" placeholder="Enter Tasks">
-            <br>
-            <button class="ui right labeled icon button" type="submit">
-                <i class="plus icon"></i>Add</button>
+        <h1 class="ui center aligned icon header">
+            <i class="circular red paperclip icon"></i>
+            TASKER
+        </h1>
+        <form class="ui fluid form" action="/add" method="post">
+            <label style="margin-bottom: 10px;" class=" huge ui teal tag label" for="title"> TASKS </label>
+
+
+            <div class="ui  input focus right labeled left icon input">
+                <i class="tags icon"></i>
+                <input type="text" placeholder="Enter tasks">
+
+                <button class="ui tag label primary button" type="submit">
+                    <i class="plus icon"></i>Add</button>
+
+            </div>
         </form>
         {% for task in task_list %}
-        <div class="ui segment">
+        <div class="ui   blue   raised secondary segment">
             <p class="ui big header"> {{task.id}} | {{task.title}} </p>
             {% if task.complete == False%}
-            <button class="ui compact labeled icon button">
+
+            <button class="ui compact  labeled icon button">
                 <i class="large green thumbs up icon"></i>
                 Task-Completed
             </button>
@@ -35,10 +45,17 @@
                 Task-Pending
             </button>
             {% endif %}
-            <a style="margin:0 15px;padding:0 15px; " href="/update/{{ task.id }}"> <i class="large sync icon"></i></a>
-            <!-- <a class="ui blue button" href="/update/{{ task.id }}">UPDATE</a> -->
-            <a href="/delete/{{ task.id }}"> <i class=" right floated large red minus circle icon"></i></a>
+
+            <div class="ui  horizontal segments">
+                <div class="ui secondary  green segment  center aligned">
+                    <a href="/update/{{ task.id }}">Update Task Status <i class="large sync icon"></i></a>
+                </div>
+
+                <div class="ui  secondary  red  segment  center aligned">
+                    <a href="/delete/{{ task.id }}">Delete Task <i class="large red minus circle icon"></i></a></div>
+            </div>
         </div>
+
         {% endfor %}
     </div>
 </body>
